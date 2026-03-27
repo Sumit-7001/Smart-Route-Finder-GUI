@@ -1,0 +1,37 @@
+{
+  "brand": "Siri",
+  "theme": "Dark",
+  "colors": {
+    "primary": "#007AFF",
+    "background": "#000000",
+    "surface": "rgba(28, 28, 30, 0.8)",
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "rgba(255, 255, 255, 0.6)",
+      "accent": "linear-gradient(45deg, #FF3B30, #AF52DE, #5856D6, #007AFF, #5AC8FA, #4CD964)"
+    },
+    "siri": {
+      "aura": "radial-gradient(circle, rgba(94, 92, 230, 0.4) 0%, rgba(0, 122, 255, 0.2) 50%, rgba(0, 0, 0, 0) 100%)",
+      "glow": "#5E5CE6"
+    }
+  },
+  "typography": {
+    "fontFamily": "'Inter', -apple-system, sans-serif",
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "spacing": {
+    "unit": 8,
+    "container": 24,
+    "section": 80
+  },
+  "effects": {
+    "blur": "20px",
+    "borderRadius": "16px",
+    "transition": "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+  }
+}

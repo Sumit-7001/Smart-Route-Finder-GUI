@@ -1,0 +1,8 @@
+{
+  "company_name": "Apple Inc.",
+  "company_description": "Siri is an easy way to make calls, send texts, use apps, and get things done with just your voice. And Siri is the most private intelligent assistant.",
+  "company_mission": "Get everyday tasks done using only your voice. Protected by the strongest privacy of any intelligent assistant.",
+  "supports_sso": true,
+  "is_open_source": false,
+  "is_in_yc": false
+}

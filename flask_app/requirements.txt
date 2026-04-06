@@ -1,0 +1,6 @@
+flask
+flask-cors
+flask-sqlalchemy
+flask-login
+pymongo
+python-dotenv

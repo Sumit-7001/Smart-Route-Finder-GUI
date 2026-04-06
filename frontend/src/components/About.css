@@ -1,0 +1,219 @@
+.about-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-color);
+}
+
+.siri-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.main-orb {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary-color), transparent);
+  top: -100px;
+  right: -100px;
+  animation: orb-float 20s infinite alternate;
+}
+
+.secondary-orb {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #af52de, transparent);
+  bottom: -50px;
+  left: -50px;
+  animation: orb-float 15s infinite alternate-reverse;
+}
+
+@keyframes orb-float {
+  from { transform: translate(0, 0); }
+  to { transform: translate(50px, 50px); }
+}
+
+.about-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 60px;
+  background: #161617;
+  backdrop-filter: blur(var(--blur-amount)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(200%);
+  border: var(--glass-border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.9);
+  animation: float-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-shine);
+  pointer-events: none;
+}
+
+@keyframes float-in {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(-3px);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-header h1 {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  margin: 15px 0 5px;
+  background: var(--siri-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.version {
+  font-size: 13px;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-section {
+  margin-bottom: 40px;
+}
+
+.about-section h2 {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.about-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+.about-section p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.algo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.algo-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.algo-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+.algo-card h3 {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.algo-card p {
+  font-size: 14px;
+}
+
+.tech-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.tech-list li {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.tech-list li span {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.about-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.about-footer p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+  .algo-grid, .tech-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Smart Route Finder{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="card-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="siri-logo-orbit">
+                    <div class="siri-orb"></div>
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to your account</p>
+            </div>
+
+            <form method="POST" class="login-form">
+                <div class="input-group">
+                    <input type="email" name="email" id="email" placeholder=" " required>
+                    <label for="email">Email Address</label>
+                    <div class="input-glow"></div>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" name="password" id="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                    <div class="input-glow"></div>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="{{ url_for('main.signup') }}">Create one now.</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

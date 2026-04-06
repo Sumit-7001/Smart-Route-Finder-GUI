@@ -1,8 +1,6 @@
 .notification-container {
-  position: absolute;
-  bottom: calc(100% + 20px);
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  top: 0;
   width: max-content;
   max-width: 90%;
   background: rgba(28, 28, 30, 0.8);
@@ -65,7 +63,7 @@
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--primary-color));
   width: 100%;
-  animation: progress 4s linear forwards;
+  animation: progress 1s linear forwards;
 }
 
 .notification-container.error .notification-progress {

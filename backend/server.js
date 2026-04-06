@@ -2,6 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import User from './models/User.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { runDijkstra, runFloydWarshall } from './utils/routing.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 5010;
@@ -47,6 +54,51 @@ app.post('/api/login', async (req, res) => {
     }
   } catch (err) {
     console.error('Login error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Map Route Finder Endpoints
+app.get('/api/map-nodes', (req, res) => {
+  try {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'map_graph.json'), 'utf8'));
+    res.json(data.nodes);
+  } catch (err) {
+    console.error('Error reading map data:', err);
+    res.status(500).json({ message: 'Error reading map data' });
+  }
+});
+
+app.post('/api/map-route', (req, res) => {
+  try {
+    const { sourceNode, destNode, algorithm } = req.body;
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'map_graph.json'), 'utf8'));
+    
+    const startTime = performance.now();
+    let result;
+    
+    if (algorithm === 'dijkstra') {
+      result = runDijkstra(data.nodes, data.edges, sourceNode, destNode);
+    } else {
+      result = runFloydWarshall(data.nodes, data.edges, sourceNode, destNode);
+    }
+    
+    const endTime = performance.now();
+    const executionTime = (endTime - startTime).toFixed(4);
+
+    if (result) {
+      const pathNodes = result.path.map(id => data.nodes.find(n => n.id === id));
+      res.json({
+        ...result,
+        path: pathNodes,
+        time: executionTime,
+        algorithm: algorithm === 'dijkstra' ? 'Dijkstra' : 'Floyd-Warshall'
+      });
+    } else {
+      res.status(404).json({ message: 'No path found' });
+    }
+  } catch (err) {
+    console.error('Routing error:', err);
     res.status(500).json({ message: 'Internal server error' });
   }
 });

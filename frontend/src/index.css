@@ -1,42 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #007AFF;
+  --primary-color: #0076df;
   --bg-color: #000000;
-  --surface-color: rgba(28, 28, 30, 0.8);
-  --text-primary: #FFFFFF;
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --siri-aura: radial-gradient(circle, rgba(94, 92, 230, 0.4) 0%, rgba(0, 122, 255, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
-  --siri-accent: linear-gradient(45deg, #FF3B30, #AF52DE, #5856D6, #007AFF, #5AC8FA, #4CD964);
-  --blur-amount: 20px;
-  --radius: 20px;
-  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --surface-color: rgba(22, 22, 23, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: #86868b;
+  --siri-aura: radial-gradient(circle at 10% 20%, rgba(0, 118, 223, 0.2) 0%, transparent 80%),
+               radial-gradient(circle at 90% 80%, rgba(175, 82, 222, 0.15) 0%, transparent 80%);
+  --siri-accent: linear-gradient(135deg, #0076df 0%, #af52de 50%, #ff2d55 100%);
+  --blur-amount: 40px;
+  --radius: 32px;
+  --transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'SF Pro Display', 'SF Pro Text', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.015em;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  overflow: hidden;
-  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-#root, .App {
+#root,
+.App {
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100%;
 }
 
 .siri-bg {
@@ -46,7 +48,22 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: var(--bg-color);
+  background: radial-gradient(circle at 50% 50%, #0a0a0c 0%, #030303 100%);
+  overflow: hidden;
+}
+
+.siri-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  filter: contrast(150%) brightness(150%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .siri-aura {
@@ -61,8 +78,13 @@ body {
 }
 
 @keyframes siri-float {
-  from { transform: translate(0, 0) rotate(0deg) scale(1); }
-  to { transform: translate(-10%, -10%) rotate(10deg) scale(1.1); }
+  from {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: translate(-10%, -10%) rotate(10deg) scale(1.1);
+  }
 }
 
 .siri-glow {
@@ -70,8 +92,82 @@ body {
   bottom: -20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
-  height: 40%;
-  background: radial-gradient(ellipse at center, rgba(94, 92, 230, 0.3) 0%, rgba(0, 122, 255, 0.1) 60%, transparent 100%);
-  filter: blur(60px);
+  width: 100%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.siri-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.22;
+  z-index: 0;
+  animation: orb-float 25s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #5e5ce6, #007aff, transparent 70%);
+  top: -200px;
+  left: -100px;
+  animation-duration: 35s;
+}
+
+.orb-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #ff2d55, #ff375f, transparent 70%);
+  bottom: -150px;
+  right: -50px;
+  animation-duration: 40s;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #007aff, #5ac8fa, transparent 70%);
+  top: 15%;
+  right: -100px;
+  animation-duration: 32s;
+  animation-delay: -10s;
+}
+
+.orb-4 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #af52de, #5e5ce6, transparent 70%);
+  bottom: 10%;
+  left: -50px;
+  animation-duration: 38s;
+  animation-delay: -15s;
+}
+
+@keyframes orb-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(100px, 50px) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-50px, 100px) scale(0.9);
+  }
+}
+
+.fixed-notification-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 99999;
 }

@@ -25,7 +25,9 @@ const Login = () => {
       
       const data = await response.json();
       if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data.user));
         showNotification(`Welcome back, ${data.user.name}!`, 'success');
+        setTimeout(() => navigate('/dashboard'), 1500);
       } else {
         showNotification(data.message || 'Login failed', 'error');
       }
@@ -36,12 +38,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="card-wrapper" style={{ position: 'relative' }}>
+      <div className="fixed-notification-wrapper">
         <Notification 
           message={notification.message} 
           type={notification.type} 
           onClose={() => setNotification({ message: '', type: '' })} 
         />
+      </div>
+      <div className="card-wrapper">
         <div className="login-card">
           <div className="login-header">
             <div className="siri-logo-orbit">

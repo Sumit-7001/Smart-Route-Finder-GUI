@@ -38,19 +38,23 @@ const Signup = () => {
 
   return (
     <div className="login-container">
-      <div className="card-wrapper" style={{ position: 'relative' }}>
+      <div className="fixed-notification-wrapper">
         <Notification 
           message={notification.message} 
           type={notification.type} 
           onClose={() => setNotification({ message: '', type: '' })} 
         />
+      </div>
+      <div className="card-wrapper">
         <div className="login-card">
           <div className="login-header">
-            <div className="siri-logo-orbit">
-              <div className="siri-orb"></div>
+            <div className="apple-brand-icon">
+              <svg viewBox="0 0 24 24" fill="white" width="48" height="48">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
             </div>
-            <h1>Create Account</h1>
-            <p>Join our premium platform</p>
+            <h1>Create Your Account</h1>
+            <p>Join the future of route finding.</p>
           </div>
           
           <form className="login-form" onSubmit={handleSignup}>
@@ -90,8 +94,8 @@ const Signup = () => {
             <div className="input-glow"></div>
           </div>
           
-          <button type="submit" className="login-btn">
-            Sign Up
+          <button type="submit" className="login-btn continue-btn">
+            Continue
           </button>
         </form>
         
@@ -105,3 +109,12 @@ const Signup = () => {
   };
 
 export default Signup;
+
+
+
+
+
+
+
+
+

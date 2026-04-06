@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}About - Smart Route Finder{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <!-- Siri Orbs specifically for the About page background -->
+    <div class="siri-bg">
+        <div class="siri-orb main-orb"></div>
+        <div class="siri-orb secondary-orb"></div>
+    </div>
+
+    <div class="about-card glass-panel">
+        <button class="back-btn" onclick="history.back()">
+            <span>←</span> Back
+        </button>
+
+        <header class="about-header">
+            <div class="app-icon">
+                <div class="siri-logo-orbit small">
+                    <div class="siri-orb"></div>
+                </div>
+            </div>
+            <h1>Smart Route Finder</h1>
+            <p class="version">Version 1.0.0 • Premium Edition</p>
+        </header>
+
+        <div class="about-content">
+            <section class="about-section">
+                <h2>Our Purpose</h2>
+                <p>
+                    Smart Route Finder is an effortless way to visualize complex networks, discover the most efficient paths, 
+                    and master graph analysis with speed and precision. Built with the strongest commitment to design 
+                    excellence and user privacy, it is the most intuitive pathfinding assistant for your professional workflow.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2>Technological Core</h2>
+                <div class="algo-grid">
+                    <div class="algo-card">
+                        <h3>Dijkstra's Algorithm</h3>
+                        <p>An efficient greedy approach for finding the shortest paths between nodes in a graph, ideal for real-time routing.</p>
+                    </div>
+                    <div class="algo-card">
+                        <h3>Floyd-Warshall</h3>
+                        <p>A robust all-pairs shortest path algorithm that ensures comprehensive network analysis for all possible connections.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2>The Tech Stack</h2>
+                <ul class="tech-list">
+                    <li><span>Backend:</span> Python, Flask</li>
+                    <li><span>Frontend:</span> Jinja2, Vanilla CSS, JS</li>
+                    <li><span>Persistence:</span> SQLite (SQLAlchemy)</li>
+                    <li><span>Design:</span> Siri-Inspired Glassmorphism</li>
+                </ul>
+            </section>
+        </div>
+
+        <footer class="about-footer">
+            <p>© 2026 Smart Route Finder GUI. Made with ❤️ for pathfinding enthusiasts.</p>
+        </footer>
+    </div>
+</div>
+{% endblock %}

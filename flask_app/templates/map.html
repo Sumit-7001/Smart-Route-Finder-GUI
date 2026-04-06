@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Map Route Finder - Smart Route Finder{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Premium Map Layout Styles (Ported from MapRouteFinder.css) */
+    .map-page-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        color: white;
+    }
+    .map-content {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+    }
+    .map-controls {
+        width: 350px;
+        padding: 24px;
+        margin: 20px;
+        border-radius: var(--radius);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .map-display-container {
+        flex: 1;
+        position: relative;
+        margin: 20px 20px 20px 0;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: var(--glass-border);
+    }
+    #map-container {
+        height: 100%;
+        width: 100%;
+        background: #111;
+    }
+    /* Customize Leaflet markers and popups for dark mode */
+    .leaflet-popup-content-wrapper {
+        background: rgba(22, 22, 23, 0.9) !important;
+        color: white !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+    }
+    .leaflet-popup-tip {
+        background: rgba(22, 22, 23, 0.9) !important;
+    }
+    .map-results-summary {
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        margin-top: auto;
+    }
+    .summary-stat {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    .path-text {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 5px;
+        line-height: 1.4;
+    }
+    .path-step-node { color: var(--text-primary); font-weight: 500; }
+    .path-step-arrow { margin: 0 4px; color: var(--primary-color); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="map-page-container">
+    <nav class="dashboard-nav">
+        <div class="nav-brand" onclick="location.href='{{ url_for('main.dashboard') }}'">
+            <div class="siri-logo-orbit">
+                <div class="siri-orb"></div>
+            </div>
+            <span>Smart Route Finder</span>
+        </div>
+        <div class="nav-profile">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.about') }}">About</a>
+            <a href="{{ url_for('main.logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="map-content">
+        <aside class="map-controls glass-panel">
+            <h2>Route Intelligence</h2>
+            <p class="subtitle">Experience real-world graph navigation.</p>
+            
+            <div class="input-group">
+                <label>Source City</label>
+                <div class="input-with-action" style="display: flex; gap: 8px;">
+                    <select id="source" style="flex: 1; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                        <option value="">Select Source</option>
+                    </select>
+                    <button id="get-location" class="location-btn" style="background: var(--primary-color); border: none; padding: 10px; border-radius: 12px; cursor: pointer; color: white;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                          <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Destination City</label>
+                <select id="destination" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <option value="">Select Destination</option>
+                </select>
+            </div>
+
+            <div class="algorithm-selection">
+                <label>Algorithm</label>
+                <div class="radio-group" style="display: flex; gap: 10px; margin-top: 8px;">
+                    <label class="radio-pill active" style="padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 20px; cursor: pointer;">
+                        <input type="radio" value="dijkstra" name="algorithm" checked hidden>
+                        <span>Dijkstra</span>
+                    </label>
+                    <label class="radio-pill" style="padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 20px; cursor: pointer;">
+                        <input type="radio" value="floyd" name="algorithm" hidden>
+                        <span>Floyd-Warshall</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="button-group" style="display: flex; gap: 10px;">
+                <button id="find-path" class="primary-btn" style="flex: 2; padding: 14px; background: var(--primary-color); border: none; border-radius: 16px; color: white; font-weight: 600; cursor: pointer;">Find Path</button>
+                <button id="clear-map" class="clear-btn" style="flex: 1; padding: 14px; background: rgba(255,255,255,0.1); border: none; border-radius: 16px; color: white; cursor: pointer;">Clear</button>
+            </div>
+
+            <div id="results-summary" class="map-results-summary" style="display: none;">
+                <div class="summary-stat">
+                    <span>Distance</span>
+                    <strong id="result-dist">0 km</strong>
+                </div>
+                <div class="summary-stat">
+                    <span>Execution</span>
+                    <strong id="result-time">0 ms</strong>
+                </div>
+                <div class="path-text" id="result-path">
+                </div>
+            </div>
+        </aside>
+
+        <section class="map-display-container">
+            <div id="map-container"></div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

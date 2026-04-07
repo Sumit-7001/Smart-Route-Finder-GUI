@@ -18,9 +18,8 @@ def get_mongo_db():
 
 @main.route('/')
 def index():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
-    return redirect(url_for('main.login'))
+    # Go straight to dashboard — no login required
+    return redirect(url_for('main.dashboard'))
 
 
 @main.route('/login', methods=['GET', 'POST'])
@@ -67,9 +66,10 @@ def logout():
 # ── Page routes ───────────────────────────────────────────────────────────────
 
 @main.route('/dashboard')
-@login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.name)
+    # No login required — show dashboard to everyone
+    name = current_user.name if current_user.is_authenticated else "Guest"
+    return render_template('dashboard.html', name=name)
 
 
 @main.route('/about')
@@ -78,8 +78,8 @@ def about():
 
 
 @main.route('/map')
-@login_required
 def map():
+    # No login required
     return render_template('map.html')
 
 
@@ -100,7 +100,6 @@ def get_nodes():
 
 
 @main.route('/api/map-route', methods=['POST'])
-@login_required
 def get_route():
     try:
         from utils import run_dijkstra, run_floyd_warshall

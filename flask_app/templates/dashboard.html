@@ -14,8 +14,12 @@
         <div class="nav-profile">
             <a href="{{ url_for('main.map') }}" class="about-nav-link">Map Route</a>
             <a href="{{ url_for('main.about') }}" class="about-nav-link">About</a>
-            <span class="user-name-display">{{ current_user.name }}</span>
-            <a href="{{ url_for('main.logout') }}" class="logout-btn">Logout</a>
+            {% if current_user.is_authenticated %}
+                <span class="user-name-display">{{ current_user.name }}</span>
+                <a href="{{ url_for('main.logout') }}" class="logout-btn">Logout</a>
+            {% else %}
+                <a href="{{ url_for('main.login') }}" class="logout-btn" style="background: linear-gradient(135deg, #667eea, #764ba2);">Login</a>
+            {% endif %}
         </div>
     </nav>
 

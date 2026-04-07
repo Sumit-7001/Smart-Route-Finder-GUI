@@ -1,8 +1,8 @@
 flask
 flask-cors
-flask-sqlalchemy
 flask-login
-pymongo
+pymongo[srv]
 python-dotenv
-psycopg2-binary
+werkzeug
 gunicorn
+dnspython

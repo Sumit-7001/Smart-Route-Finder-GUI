@@ -48,15 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.shadowBlur = 15;
                 ctx.shadowColor = '#007AFF';
             } else {
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+                ctx.lineWidth = 1.5;
                 ctx.shadowBlur = 0;
             }
             ctx.stroke();
 
             // Weight text
             ctx.shadowBlur = 0;
-            ctx.fillStyle = isHighlighted ? '#ffffff' : 'rgba(255, 255, 255, 0.4)';
+            ctx.fillStyle = isHighlighted ? '#ffffff' : 'rgba(255, 255, 255, 0.3)';
             ctx.font = isHighlighted ? 'bold 13px Inter' : '11px Inter';
             ctx.textAlign = 'center';
             const midX = (from.x + to.x) / 2;
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.stroke();
 
             ctx.shadowBlur = 0;
-            ctx.fillStyle = isSelected || isInPath ? '#ffffff' : 'rgba(255, 255, 255, 0.7)';
+            ctx.fillStyle = isSelected || isInPath ? '#ffffff' : 'rgba(255, 255, 255, 0.6)';
             ctx.font = (isSelected || isInPath) ? 'bold 14px Inter' : '12px Inter';
             ctx.textAlign = 'center';
             ctx.fillText(loc.name, loc.x, loc.y + 30);

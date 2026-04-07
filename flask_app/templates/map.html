@@ -97,9 +97,8 @@
             <div class="input-group">
                 <label>Source City</label>
                 <div class="input-with-action" style="display: flex; gap: 8px;">
-                    <select id="source" style="flex: 1; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
-                        <option value="">Select Source</option>
-                    </select>
+                    <input type="text" id="source" list="city-list" placeholder="Search Source..." 
+                           style="flex: 1; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);">
                     <button id="get-location" class="location-btn" style="background: var(--primary-color); border: none; padding: 10px; border-radius: 12px; cursor: pointer; color: white;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                           <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
@@ -111,10 +110,11 @@
 
             <div class="input-group">
                 <label>Destination City</label>
-                <select id="destination" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
-                    <option value="">Select Destination</option>
-                </select>
+                <input type="text" id="destination" list="city-list" placeholder="Search Destination..." 
+                       style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);">
             </div>
+
+            <datalist id="city-list"></datalist>
 
             <div class="algorithm-selection">
                 <label>Algorithm</label>
@@ -151,6 +151,21 @@
 
         <section class="map-display-container">
             <div id="map-container"></div>
+            <!-- Live Travel Overlay -->
+            <div id="live-travel-overlay" class="glass-panel" style="display: none; position: absolute; top: 20px; right: 20px; width: 220px; padding: 20px; border-radius: 20px; z-index: 1000; background: rgba(8, 10, 15, 0.8) !important;">
+                <h3 style="font-size: 14px; color: var(--primary-color); text-transform: uppercase;">Real-Time Status</h3>
+                <div class="stat-row" style="margin-top: 15px;">
+                    <span style="font-size: 11px; color: var(--text-secondary);">Current Speed</span>
+                    <div id="live-speed" style="font-size: 20px; font-weight: 700;">0 km/h</div>
+                </div>
+                <div class="stat-row" style="margin-top: 10px;">
+                    <span style="font-size: 11px; color: var(--text-secondary);">Remaining</span>
+                    <div id="live-eta" style="font-size: 20px; font-weight: 700;">0 km</div>
+                </div>
+                <div id="travel-progress-container" style="margin-top: 15px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+                    <div id="travel-progress-bar" style="width: 0%; height: 100%; background: var(--primary-color); transition: width 0.3s ease;"></div>
+                </div>
+            </div>
         </section>
     </div>
 </div>

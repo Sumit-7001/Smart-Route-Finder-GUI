@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #14274E;
-  --secondary-color: #394867;
-  --bg-color: #F1F6F9;
-  --surface-color: rgba(155, 164, 180, 0.15);
-  --text-primary: #14274E;
-  --text-secondary: #394867;
-  --siri-aura: radial-gradient(circle at 10% 20%, rgba(20, 39, 78, 0.05) 0%, transparent 80%),
-               radial-gradient(circle at 90% 80%, rgba(57, 72, 103, 0.04) 0%, transparent 80%);
-  --siri-accent: linear-gradient(135deg, #14274E 0%, #394867 50%, #9BA4B4 100%);
-  --blur-amount: 30px;
-  --radius: 28px;
+  --primary-color: #007AFF;
+  --secondary-color: #5E5CE6;
+  --bg-color: #080a0f;
+  --surface-color: rgba(28, 28, 30, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --siri-aura: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 80%),
+               radial-gradient(circle at 90% 80%, rgba(94, 92, 230, 0.1) 0%, transparent 80%);
+  --siri-accent: linear-gradient(135deg, #007AFF 0%, #5E5CE6 50%, #AF52DE 100%);
+  --blur-amount: 40px;
+  --radius: 32px;
   --transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  --glass-border: 1px solid rgba(20, 39, 78, 0.08);
-  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
 }
 
 * {
@@ -49,7 +49,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: radial-gradient(circle at 50% 50%, #F1F6F9 0%, #e1e7ec 100%);
+  background: radial-gradient(circle at 50% 50%, #080a0f 0%, #020305 100%);
   overflow: hidden;
 }
 
@@ -532,15 +532,15 @@ body {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(var(--blur-amount)) saturate(200%);
-  -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(200%);
+  background: var(--surface-color) !important;
+  backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
   border: var(--glass-border);
   border-radius: var(--radius);
   padding: 40px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
   transition: var(--transition);
 }
 
@@ -622,11 +622,11 @@ body {
 }
 
 .dash-input-group select {
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05); /* Updated for dark theme */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 12px;
-  color: var(--text-primary);
+  color: #ffffff;
   outline: none;
   cursor: pointer;
 }
@@ -663,8 +663,8 @@ body {
   display: block;
   text-align: center;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   transition: var(--transition);
   font-size: 14px;
@@ -696,9 +696,9 @@ body {
 
 .reset-btn {
   flex: 1;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   padding: 16px;
   border-radius: 12px;
   font-size: 16px;
@@ -715,9 +715,9 @@ body {
 
 .compare-btn {
   flex: 1.5;
-  background: rgba(0, 122, 255, 0.2);
+  background: rgba(0, 122, 255, 0.1);
   border: 1px solid var(--primary-color);
-  color: white;
+  color: #ffffff;
   padding: 16px;
   border-radius: 12px;
   font-size: 16px;
@@ -729,7 +729,7 @@ body {
 .compare-btn:hover {
   background: var(--primary-color);
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 122, 255, 0.4);
 }
 
 .add-controls {
@@ -777,9 +777,9 @@ body {
 }
 
 .comp-row.head {
-  background: rgba(0, 122, 255, 0.1);
+  background: rgba(0, 122, 255, 0.15);
   font-weight: 600;
-  color: var(--primary-color);
+  color: #ffffff;
 }
 
 .comp-note {
@@ -810,16 +810,17 @@ body {
 }
 
 .stat-card {
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px);
   padding: 24px;
-  border-radius: 20px;
+  border-radius: 24px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: var(--transition);
   min-height: 140px;
 }
 
@@ -839,13 +840,13 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .stat-value {
   font-size: 28px;
   font-weight: 800;
-  color: #1e293b;
+  color: #ffffff;
   line-height: 1.2;
 }
 
@@ -1115,8 +1116,8 @@ body {
 
 .search-btn {
   flex: 2;
-  background: #ffffff;
-  color: #000000;
+  background: var(--primary-color);
+  color: #ffffff;
   border: none;
   border-radius: 14px;
   padding: 16px;
@@ -1213,6 +1214,25 @@ body {
   font-weight: 700;
 }
 
+.path-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.badge {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.4);
+}
+
 .map-display-container {
   flex: 1;
   border-radius: var(--radius);
@@ -1244,9 +1264,8 @@ body {
   background: #000;
 }
 
-.leaflet-tile-pane {
-  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-}
+/* Map tile styling handled by native Dark Matter tiles */
+
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: #1c1c1e !important;
